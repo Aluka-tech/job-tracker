@@ -1,0 +1,22 @@
+{% extends "applications/base.html" %}
+
+{% block content %}
+
+<div style="max-width:480px; margin:4rem auto; text-align:center;">
+    <div class="card">
+        <h2 style="color:#ef4444; margin-bottom:1rem;">Delete Application</h2>
+        <p style="color:var(--muted); margin-bottom:0.5rem;">Are you sure you want to delete your application for</p>
+        <p style="font-size:1.1rem; margin-bottom:0.25rem;"><strong>{{ application.role }}</strong></p>
+        <p style="color:var(--muted); margin-bottom:2rem;">at <strong style="color:var(--white);">{{ application.company_name }}</strong>?</p>
+
+        <div style="display:flex; gap:1rem; justify-content:center;">
+            <form method="POST">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            </form>
+            <a href="{% url 'application_detail' application.id %}" class="btn btn-ghost">Cancel</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

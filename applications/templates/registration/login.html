@@ -1,0 +1,30 @@
+{% extends "applications/base.html" %}
+
+{% block content %}
+
+<div style="max-width:480px; margin:4rem auto;">
+    <h1 style="margin-bottom:0.5rem;">Welcome Back</h1>
+    <p style="color:var(--muted); margin-bottom:2rem;">Login to your account to continue.</p>
+
+    <div class="card">
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <div style="margin-bottom:1.25rem;">
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <p style="color:#ef4444; font-size:0.8rem;">{{ field.errors }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary" style="width:100%; margin-top:0.5rem;">Login</button>
+        </form>
+    </div>
+
+    <p style="text-align:center; color:var(--muted); margin-top:1.5rem;">
+        Don't have an account? <a href="{% url 'register' %}">Register</a>
+    </p>
+</div>
+
+{% endblock %}

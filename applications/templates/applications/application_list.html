@@ -1,0 +1,81 @@
+{% extends "applications/base.html" %}
+
+{% block content %}
+
+<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:2rem;">
+    <h1>My Applications</h1>
+    <a href="{% url 'add_application' %}" class="btn btn-primary">+ Add New</a>
+</div>
+<div style="display:flex; gap:1rem; margin-bottom:1.5rem; flex-wrap:wrap;">
+    <input type="text" id="searchInput" placeholder="Search company or role..." style="flex:1; min-width:200px;">
+    <div style="display:flex; gap:0.5rem;">
+        <button class="btn btn-ghost filter-btn active" data-status="all">All</button>
+        <button class="btn btn-ghost filter-btn" data-status="applied">Applied</button>
+        <button class="btn btn-ghost filter-btn" data-status="interview">Interview</button>
+        <button class="btn btn-ghost filter-btn" data-status="offer">Offer</button>
+        <button class="btn btn-ghost filter-btn" data-status="rejected">Rejected</button>
+    </div>
+</div>
+{% if applications %}
+    {% for app in applications %}
+        <div class="card" data-status="{{ app.status }}" data-company="{{ app.company_name|lower }}" data-role="{{ app.role|lower }}">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                    <a href="{% url 'application_detail' app.id %}">
+                        <strong style="font-size:1.1rem;">{{ app.company_name }}</strong>
+                    </a>
+                    <span style="color:var(--muted); margin-left:0.5rem;">— {{ app.role }}</span>
+                </div>
+                <span class="badge badge-{{ app.status }}">{{ app.status }}</span>
+            </div>
+            <div style="margin-top:0.75rem; font-size:0.85rem; color:var(--muted);">
+                Applied: {{ app.date_applied }}
+                {% if app.job_url %}
+                    · <a href="{{ app.job_url }}" target="_blank">View Posting</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p style="color:var(--muted);">No applications yet. <a href="{% url 'add_application' %}">Add one →</a></p>
+{% endif %}
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.card[data-status]');
+
+    let activeStatus = 'all';
+
+    function filterCards() {
+        const query = searchInput.value.toLowerCase();
+
+        cards.forEach(card => {
+            const company = card.dataset.company || '';
+            const role = card.dataset.role || '';
+            const status = card.dataset.status || '';
+
+            const matchesSearch = company.includes(query) || role.includes(query);
+            const matchesStatus = activeStatus === 'all' || status === activeStatus;
+
+            if (matchesSearch && matchesStatus) {
+                card.style.display = 'block';
+                card.style.animation = 'fadeIn 0.3s ease';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    searchInput.addEventListener('input', filterCards);
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeStatus = btn.dataset.status;
+            filterCards();
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Tracker</title>
+    <link rel="stylesheet" href="{% static 'applications/css/style.css' %}">
+</head>
+<body>
+
+   <nav>
+    <a href="{% url 'home' %}" style="font-size:1.2rem; font-weight:700; color:var(--gold); letter-spacing:0.05em; margin-right:1rem;">
+        JobTracker
+    </a>
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'application_list' %}">My Applications</a>
+    <a href="{% url 'add_application' %}">Add Application</a>
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+   </nav>
+
+    
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div id="toast" style="
+    position:fixed;
+    bottom:2rem;
+    right:2rem;
+    background:var(--gold);
+    color:var(--bg);
+    padding:0.75rem 1.5rem;
+    border-radius:4px;
+    font-size:0.85rem;
+    font-weight:600;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all 0.3s ease;
+    z-index:999;
+    pointer-events:none;
+">✓ Saved successfully</div>
+
+<script>
+    // Show toast if redirected after save
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('saved')) {
+        const toast = document.getElementById('toast');
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateY(20px)';
+        }, 3000);
+    }
+</script>
+</body>
+</html>

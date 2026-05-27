@@ -1,0 +1,55 @@
+{% extends "applications/base.html" %}
+
+{% block content %}
+
+<div style="margin-bottom:2rem;">
+    <a href="{% url 'application_list' %}" class="btn btn-ghost">← Back</a>
+</div>
+
+<div class="card">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem;">
+        <div>
+            <h1 style="margin-bottom:0.25rem;">{{ application.company_name }}</h1>
+            <p style="color:var(--muted); font-size:1rem;">{{ application.role }}</p>
+        </div>
+        <span class="badge badge-{{ application.status }}">{{ application.status }}</span>
+    </div>
+
+    <hr>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-top:1.5rem;">
+        <div>
+            <label>Date Applied</label>
+            <p>{{ application.date_applied }}</p>
+        </div>
+        <div>
+            <label>Status</label>
+            <p>{{ application.status }}</p>
+        </div>
+        {% if application.job_url %}
+        <div>
+            <label>Job Posting</label>
+            <p><a href="{{ application.job_url }}" target="_blank">View Posting →</a></p>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if application.notes %}
+    <div style="margin-top:1.5rem;">
+        <label>Notes</label>
+        <p style="color:var(--muted); line-height:1.8;">{{ application.notes }}</p>
+    </div>
+    {% endif %}
+
+    <hr>
+
+    <div style="display:flex; gap:1rem; margin-top:1.5rem;">
+        <a href="{% url 'edit_application' application.id %}" class="btn btn-ghost">Edit</a>
+        <form method="POST" action="{% url 'delete_application' application.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
