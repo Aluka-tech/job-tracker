@@ -249,3 +249,115 @@ hr {
 .card {
     animation: fadeIn 0.4s ease;
 }
+
+/* ── MOBILE RESPONSIVENESS ── */
+@media (max-width: 768px) {
+
+    /* Nav */
+    nav {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    nav form {
+        margin-left: 0;
+    }
+
+    /* Content */
+    .content {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    /* Stats grid — 2 columns on mobile */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Hero text on home page */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    /* Cards */
+    .card {
+        padding: 1rem;
+    }
+
+    /* Application list — stack instead of row */
+    .card > div[style*="display:flex"] {
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: flex-start !important;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Forms */
+    input, select, textarea {
+        font-size: 1rem;
+    }
+
+    /* Detail page grid */
+    div[style*="grid-template-columns:1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Filter buttons — wrap on mobile */
+    div[style*="display:flex; gap:1rem; margin-bottom:1.5rem"] {
+        flex-direction: column;
+    }
+
+    /* Search + filter */
+    div[style*="display:flex; gap:0.5rem"] {
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    /* Auth pages */
+    div[style*="max-width:480px"] {
+        margin: 2rem auto;
+    }
+
+    /* Add/edit forms */
+    div[style*="max-width:600px"] {
+        margin: 0 auto;
+    }
+
+    /* Hire buttons row */
+    div[style*="display:flex; gap:1rem; margin-top:1.5rem"] {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Stats grid — 1 column on very small screens */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    nav {
+        gap: 0.5rem;
+    }
+
+    .nav-logo {
+        font-size: 1rem;
+    }
+}
