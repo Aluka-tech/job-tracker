@@ -1,42 +1,52 @@
-{% extends "applications/base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
 
 <h1>Dashboard</h1>
 
 <div class="stats-grid">
+
     <div class="stat-card">
         <div class="stat-number">{{ total }}</div>
-        <div class="stat-label">Total</div>
+        <div class="stat-label">Total Applications</div>
     </div>
+
     <div class="stat-card">
         <div class="stat-number">{{ applied }}</div>
         <div class="stat-label">Applied</div>
     </div>
+
     <div class="stat-card">
         <div class="stat-number">{{ interview }}</div>
         <div class="stat-label">Interview</div>
     </div>
+
     <div class="stat-card">
         <div class="stat-number">{{ offer }}</div>
-        <div class="stat-label">Offer</div>
+        <div class="stat-label">Offers</div>
     </div>
-    <div class="stat-card">
-        <div class="stat-number">{{ rejected }}</div>
-        <div class="stat-label">Rejected</div>
-    </div>
+
 </div>
 
-<h3>Recent Applications</h3>
+<h2>Recent Applications</h2>
 
 {% for app in recent_applications %}
     <div class="card">
-        <strong>{{ app.company_name }}</strong> — {{ app.role }}
-        <span class="badge badge-{{ app.status }}">{{ app.status }}</span>
-        <div style="color: var(--muted); font-size:0.85rem;">{{ app.date_applied }}</div>
+        <h3>{{ app.company_name }}</h3>
+        <p>{{ app.role }}</p>
+
+        <span class="badge badge-{{ app.status|lower }}">
+            {{ app.status }}
+        </span>
+
+        <p>
+            <a href="{% url 'application_detail' app.id %}">
+                View →
+            </a>
+        </p>
     </div>
 {% empty %}
-    <p style="color: var(--muted);">No applications yet. <a href="{% url 'add_application' %}">Add one →</a></p>
+    <p>No applications yet.</p>
 {% endfor %}
 
 {% endblock %}

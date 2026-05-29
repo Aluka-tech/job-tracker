@@ -1,4 +1,6 @@
-/* ── VARIABLES & RESET ── */
+/* ─────────────────────────────
+   VARIABLES & RESET
+──────────────────────────── */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -10,31 +12,39 @@
     --surface: #111827;
     --card: #1a2235;
     --border: rgba(255, 255, 255, 0.08);
+
     --gold: #c9a84c;
     --gold-dim: rgba(201, 168, 76, 0.3);
+
     --white: #e8e6e0;
     --muted: rgba(232, 230, 224, 0.5);
-    --font-main: 'Segoe UI', system-ui, sans-serif;
+
+    --font: 'Segoe UI', system-ui, sans-serif;
 }
 
-/* ── BASE ── */
+/* ─────────────────────────────
+   BASE
+──────────────────────────── */
 body {
-    background-color: var(--bg);
+    background: var(--bg);
     color: var(--white);
-    font-family: var(--font-main);
-    font-size: 16px;
+    font-family: var(--font);
     line-height: 1.6;
     min-height: 100vh;
 }
 
-/* ── NAV ── */
+/* ─────────────────────────────
+   NAVIGATION
+──────────────────────────── */
 nav {
     display: flex;
     align-items: center;
     gap: 1.5rem;
+
     padding: 1rem 2rem;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
+
     position: sticky;
     top: 0;
     z-index: 100;
@@ -44,8 +54,7 @@ nav a {
     color: var(--muted);
     text-decoration: none;
     font-size: 0.85rem;
-    letter-spacing: 0.05em;
-    transition: color 0.2s;
+    transition: 0.2s;
 }
 
 nav a:hover {
@@ -56,46 +65,51 @@ nav form {
     margin-left: auto;
 }
 
-nav form button {
+nav button {
     background: transparent;
     border: 1px solid var(--gold-dim);
     color: var(--gold);
     padding: 0.4rem 1rem;
-    font-size: 0.8rem;
     cursor: pointer;
-    letter-spacing: 0.05em;
-    transition: background 0.2s;
+    transition: 0.2s;
 }
 
-nav form button:hover {
+nav button:hover {
     background: var(--gold-dim);
 }
 
-/* ── MAIN CONTENT ── */
-main, .content {
+/* ─────────────────────────────
+   LAYOUT
+──────────────────────────── */
+.content,
+main {
     max-width: 900px;
     margin: 3rem auto;
     padding: 0 1.5rem;
 }
 
-/* ── HEADINGS ── */
+/* ─────────────────────────────
+   TYPOGRAPHY
+──────────────────────────── */
 h1, h2, h3 {
-    color: var(--white);
-    font-weight: 600;
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.1rem; color: var(--gold); }
 
-/* ── CARDS ── */
+/* ─────────────────────────────
+   CARDS
+──────────────────────────── */
 .card {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1rem;
+    animation: fadeIn 0.3s ease;
     transition: border-color 0.2s;
 }
 
@@ -103,27 +117,28 @@ h3 { font-size: 1.1rem; color: var(--gold); }
     border-color: var(--gold-dim);
 }
 
-/* ── BUTTONS ── */
+/* ─────────────────────────────
+   BUTTONS
+──────────────────────────── */
 .btn {
     display: inline-block;
-    padding: 0.6rem 1.5rem;
+    padding: 0.6rem 1.2rem;
     font-size: 0.85rem;
-    letter-spacing: 0.05em;
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.2s;
+    transition: 0.2s;
     border: none;
 }
 
 .btn-primary {
     background: var(--gold);
-    color: #0a0f1e;
+    color: var(--bg);
     font-weight: 600;
 }
 
 .btn-primary:hover {
-    background: #e0bb5a;
+    filter: brightness(1.1);
 }
 
 .btn-ghost {
@@ -146,17 +161,19 @@ h3 { font-size: 1.1rem; color: var(--gold); }
     background: rgba(239, 68, 68, 0.1);
 }
 
-/* ── FORMS ── */
+/* ─────────────────────────────
+   FORMS
+──────────────────────────── */
 input, select, textarea {
     width: 100%;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1rem;
+
     background: var(--surface);
     border: 1px solid var(--border);
-    color: var(--white);
-    padding: 0.65rem 1rem;
     border-radius: 4px;
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-    transition: border-color 0.2s;
+
+    color: var(--white);
 }
 
 input:focus, select:focus, textarea:focus {
@@ -165,21 +182,21 @@ input:focus, select:focus, textarea:focus {
 }
 
 label {
-    display: block;
     font-size: 0.8rem;
-    letter-spacing: 0.08em;
     color: var(--muted);
-    margin-bottom: 0.3rem;
     text-transform: uppercase;
+    margin-bottom: 0.3rem;
+    display: block;
 }
 
-/* ── STATUS BADGES ── */
+/* ─────────────────────────────
+   BADGES
+──────────────────────────── */
 .badge {
     display: inline-block;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.75rem;
-    letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 600;
 }
@@ -189,7 +206,9 @@ label {
 .badge-offer { background: rgba(16,185,129,0.15); color: #34d399; }
 .badge-rejected { background: rgba(239,68,68,0.15); color: #f87171; }
 
-/* ── STATS GRID ── */
+/* ─────────────────────────────
+   STATS GRID
+──────────────────────────── */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -207,7 +226,6 @@ label {
 
 .stat-number {
     font-size: 2rem;
-    font-weight: 700;
     color: var(--gold);
 }
 
@@ -215,10 +233,11 @@ label {
     font-size: 0.75rem;
     color: var(--muted);
     text-transform: uppercase;
-    letter-spacing: 0.1em;
 }
 
-/* ── LINKS ── */
+/* ─────────────────────────────
+   LINKS
+──────────────────────────── */
 a {
     color: var(--gold);
     text-decoration: none;
@@ -228,136 +247,54 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ── HR ── */
+/* ─────────────────────────────
+   UTILITIES
+──────────────────────────── */
 hr {
     border: none;
     border-top: 1px solid var(--border);
     margin: 1.5rem 0;
 }
 
-.filter-btn.active {
-    background: var(--gold);
-    color: var(--bg);
-    border-color: var(--gold);
-}
-
+/* ─────────────────────────────
+   ANIMATION
+──────────────────────────── */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(8px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-.card {
-    animation: fadeIn 0.4s ease;
-}
-
-/* ── MOBILE RESPONSIVENESS ── */
+/* ─────────────────────────────
+   RESPONSIVE
+──────────────────────────── */
 @media (max-width: 768px) {
 
-    /* Nav */
     nav {
         flex-wrap: wrap;
         gap: 0.75rem;
-        padding: 0.75rem 1rem;
     }
 
-    nav a {
-        font-size: 0.8rem;
-    }
-
-    nav form {
-        margin-left: 0;
-    }
-
-    /* Content */
     .content {
         margin: 1.5rem auto;
         padding: 0 1rem;
     }
 
-    /* Stats grid — 2 columns on mobile */
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    /* Hero text on home page */
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    h2 {
-        font-size: 1.2rem;
-    }
-
-    /* Cards */
-    .card {
-        padding: 1rem;
-    }
-
-    /* Application list — stack instead of row */
-    .card > div[style*="display:flex"] {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: flex-start !important;
-    }
-
-    /* Buttons */
-    .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-
-    /* Forms */
-    input, select, textarea {
-        font-size: 1rem;
-    }
-
-    /* Detail page grid */
-    div[style*="grid-template-columns:1fr 1fr"] {
-        grid-template-columns: 1fr !important;
-    }
-
-    /* Filter buttons — wrap on mobile */
-    div[style*="display:flex; gap:1rem; margin-bottom:1.5rem"] {
-        flex-direction: column;
-    }
-
-    /* Search + filter */
-    div[style*="display:flex; gap:0.5rem"] {
-        flex-wrap: wrap;
-    }
-
-    .filter-btn {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.75rem;
-    }
-
-    /* Auth pages */
-    div[style*="max-width:480px"] {
-        margin: 2rem auto;
-    }
-
-    /* Add/edit forms */
-    div[style*="max-width:600px"] {
-        margin: 0 auto;
-    }
-
-    /* Hire buttons row */
-    div[style*="display:flex; gap:1rem; margin-top:1.5rem"] {
-        flex-direction: column;
-    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
 }
 
 @media (max-width: 480px) {
-    /* Stats grid — 1 column on very small screens */
+
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
     }
 
     nav {
-        gap: 0.5rem;
-    }
-
-    .nav-logo {
-        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

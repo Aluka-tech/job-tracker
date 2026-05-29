@@ -31,29 +31,23 @@ def register(request):
 def dashboard(request):
     applications = JobApplication.objects.filter(user=request.user)
 
-    # Total
     total = applications.count()
 
-    # Count per status
     status_counts = applications.values('status').annotate(count=Count('status'))
-
-    # Convert to dictionary for easy use
     status_dict = {item['status']: item['count'] for item in status_counts}
 
-    # Recent applications (latest 5)
     recent_applications = applications.order_by('-date_applied')[:5]
 
     context = {
-    'total': total,
-    'applied': status_dict.get('applied', 0),
-    'interview': status_dict.get('interview', 0),
-    'offer': status_dict.get('offer', 0),
-    'rejected': status_dict.get('rejected', 0),
-    'recent_applications': recent_applications,
+        'total': total,
+        'applied': status_dict.get('Applied', 0),
+        'interview': status_dict.get('Interview', 0),
+        'offer': status_dict.get('Offer', 0),
+        'rejected': status_dict.get('Rejected', 0),
+        'recent_applications': recent_applications,
     }
 
-    return render(request, 'applications/dashboard.html', context)
-
+    return render(request, 'dashboard.html', context)
 
 @login_required
 def add_application(request):
