@@ -47,7 +47,7 @@ def dashboard(request):
         'recent_applications': recent_applications,
     }
 
-    return render(request, 'dashboard.html', context)
+    return render(request, 'applications/dashboard.html', context)
 
 @login_required
 def add_application(request):
