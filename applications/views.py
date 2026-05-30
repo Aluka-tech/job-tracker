@@ -54,16 +54,16 @@ def add_application(request):
     if request.method == "POST":
         form = JobApplicationForm(request.POST)
         if form.is_valid():
-            app = form.save(commit=False)   # don't save yet
-            app.user = request.user         # attach logged-in user
+            app = form.save(commit=False)
+            app.user = request.user
             app.save()
-            return redirect(f"/dashboard/?saved=true") 
+            return redirect('dashboard')
     else:
-        form = JobApplicationForm()         # empty form for GET
+        form = JobApplicationForm()
 
     return render(request, "applications/add_application.html", {
         "form": form
-    })    
+    })
 
 
 @login_required
@@ -102,17 +102,16 @@ def edit_application(request, id):
 
         if form.is_valid():
             updated_app = form.save(commit=False)
-            updated_app.user = request.user  # keep ownership safe
+            updated_app.user = request.user
             updated_app.save()
-
-            return redirect(f"/applications/{application.id}/?saved=true") 
+            return redirect(f"/applications/{application.id}/?saved=true")
     else:
         form = JobApplicationForm(instance=application)
 
     return render(request, "applications/edit_application.html", {
         "form": form,
         "application": application
-    })  
+    })
 
 @login_required
 def delete_application(request, id):
