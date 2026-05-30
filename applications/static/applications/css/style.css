@@ -31,35 +31,52 @@ body {
 }
 
 /* ─────────────────────────────
-   NAVIGATION
+   NAVBAR
 ──────────────────────────── */
-nav {
+.navbar {
     display: flex;
     align-items: center;
-    gap: 2rem;
     padding: 1rem 2rem;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-wrap: wrap;
 }
 
-.nav-logo {
+.logo {
     font-size: 1.1rem;
     font-weight: 700;
     color: var(--gold);
     letter-spacing: 0.05em;
     text-decoration: none;
-    margin-right: 0.5rem;
 }
 
-.nav-logo:hover {
+.logo:hover {
     text-decoration: none;
     color: var(--gold);
 }
 
-nav a {
+.logo-mark {
+    color: var(--gold);
+    margin-right: 0.25rem;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: auto;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
     color: var(--muted);
     text-decoration: none;
     font-size: 0.85rem;
@@ -67,7 +84,7 @@ nav a {
     transition: color 0.2s;
 }
 
-nav a::after {
+.nav-links a::after {
     content: '';
     position: absolute;
     bottom: -3px;
@@ -78,19 +95,20 @@ nav a::after {
     transition: width 0.3s ease;
 }
 
-nav a:hover {
+.nav-links a:hover {
     color: var(--gold);
+    text-decoration: none;
 }
 
-nav a:hover::after {
+.nav-links a:hover::after {
     width: 100%;
 }
 
-nav form {
-    margin-left: auto;
+.logout-form {
+    margin: 0;
 }
 
-nav button {
+.logout-btn {
     background: transparent;
     border: 1px solid var(--gold-dim);
     color: var(--gold);
@@ -101,8 +119,41 @@ nav button {
     transition: 0.2s;
 }
 
-nav button:hover {
+.logout-btn:hover {
     background: var(--gold-dim);
+}
+
+/* Hamburger — hidden on desktop */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-left: auto;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ─────────────────────────────
@@ -159,13 +210,8 @@ h3 { font-size: 1.1rem; color: var(--gold); }
     transition: all 0.2s ease;
 }
 
-.btn:hover {
-    text-decoration: none;
-}
-
-.btn:active {
-    transform: scale(0.97);
-}
+.btn:hover { text-decoration: none; }
+.btn:active { transform: scale(0.97); }
 
 .btn-primary {
     background: var(--gold);
@@ -296,9 +342,7 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    text-decoration: underline;
-}
+a:hover { text-decoration: underline; }
 
 /* ─────────────────────────────
    FILTER BUTTONS
@@ -337,139 +381,6 @@ hr {
 }
 
 /* ─────────────────────────────
-   RESPONSIVE — TABLET
-──────────────────────────── */
-@media (max-width: 768px) {
-
-    nav {
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        padding: 0.75rem 1rem;
-    }
-
-    nav form {
-        margin-left: 0;
-    }
-
-    .content, main {
-        margin: 1.5rem auto;
-        padding: 0 1rem;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.2rem; }
-
-    .card {
-        padding: 1rem;
-    }
-
-    .btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-}
-
-/* ─────────────────────────────
-   RESPONSIVE — MOBILE
-──────────────────────────── */
-@media (max-width: 480px) {
-
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    nav form {
-        width: 100%;
-    }
-
-    nav button {
-        width: 100%;
-    }
-
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .filter-btn {
-        font-size: 0.75rem;
-        padding: 0.35rem 0.6rem;
-    }
-}
-
-/* ─────────────────────────────
-   NAVBAR CLASSES
-──────────────────────────── */
-.navbar {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 1rem 2rem;
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    margin-right: 0.5rem;
-}
-
-.logo:hover {
-    text-decoration: none;
-    color: var(--gold);
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 0.85rem;
-    position: relative;
-    transition: color 0.2s;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -3px;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--gold);
-    transition: width 0.3s ease;
-}
-
-.nav-links a:hover {
-    color: var(--gold);
-    text-decoration: none;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-.logout-form {
-    margin-left: auto;
-}
-
-/* ─────────────────────────────
    TOAST
 ──────────────────────────── */
 #toast {
@@ -492,4 +403,108 @@ hr {
 #toast.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ─────────────────────────────
+   RESPONSIVE — TABLET
+──────────────────────────── */
+@media (max-width: 768px) {
+
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        width: 100%;
+        padding: 1rem 0;
+        border-top: 1px solid var(--border);
+        margin-top: 0.75rem;
+    }
+
+    .nav-menu.open {
+        display: flex;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+        width: 100%;
+        padding: 0.25rem 0;
+    }
+
+    .logout-form {
+        width: 100%;
+    }
+
+    .logout-btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.6rem 1rem;
+    }
+
+    .content, main {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+    }
+
+    .stat-card {
+        padding: 1rem 0.75rem;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+
+    .card { padding: 1rem; }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* ─────────────────────────────
+   RESPONSIVE — MOBILE
+──────────────────────────── */
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .stat-number {
+        font-size: 1.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.65rem;
+    }
+
+    .filter-btn {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.6rem;
+    }
 }

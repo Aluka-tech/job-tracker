@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-     <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>{% block title %}Trackly{% endblock %}</title>
+    <title>{% block title %}Trackly{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'applications/css/style.css' %}">
 </head>
 
@@ -12,22 +12,28 @@
 
     <!-- NAVBAR -->
     <nav class="navbar">
-       <a href="{% url 'home' %}" class="logo">
-    <span class="logo-mark">✦</span> Trackly
-</a>
+        <a href="{% url 'home' %}" class="logo">
+            <span class="logo-mark">✦</span> Trackly
+        </a>
 
-        <div class="nav-links">
-            <a href="{% url 'dashboard' %}">Dashboard</a>
-            <a href="{% url 'application_list' %}">My Applications</a>
-            <a href="{% url 'add_application' %}">Add Application</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="nav-menu" id="navMenu">
+            <div class="nav-links">
+                <a href="{% url 'dashboard' %}">Dashboard</a>
+                <a href="{% url 'application_list' %}">My Applications</a>
+                <a href="{% url 'add_application' %}">Add Application</a>
+            </div>
+            <form action="{% url 'logout' %}" method="POST" class="logout-form">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn">Logout</button>
+            </form>
         </div>
-
-        <form action="{% url 'logout' %}" method="POST" class="logout-form">
-            {% csrf_token %}
-            <button type="submit">Logout</button>
-        </form>
     </nav>
-
 
     <!-- PAGE CONTENT -->
     <main class="content">
@@ -35,19 +41,32 @@
         {% endblock %}
     </main>
 
-
     <!-- TOAST -->
     <div id="toast">✓ Saved successfully</div>
 
-
     <script>
-        const params = new URLSearchParams(window.location.search);
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
 
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('open');
+            navMenu.classList.toggle('open');
+        });
+
+        // Close menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('open');
+                navMenu.classList.remove('open');
+            });
+        });
+
+        // Toast
+        const params = new URLSearchParams(window.location.search);
         if (params.get('saved')) {
             const toast = document.getElementById('toast');
-
             toast.classList.add('show');
-
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 3000);
