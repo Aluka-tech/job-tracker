@@ -39,13 +39,13 @@ def dashboard(request):
     recent_applications = applications.order_by('-date_applied')[:5]
 
     context = {
-        'total': total,
-        'applied': status_dict.get('Applied', 0),
-        'interview': status_dict.get('Interview', 0),
-        'offer': status_dict.get('Offer', 0),
-        'rejected': status_dict.get('Rejected', 0),
-        'recent_applications': recent_applications,
-    }
+    'total': total,
+    'applied': status_dict.get('applied', 0),
+    'interview': status_dict.get('interview', 0),
+    'offer': status_dict.get('offer', 0),
+    'rejected': status_dict.get('rejected', 0),
+    'recent_applications': recent_applications,
+}
 
     return render(request, 'applications/dashboard.html', context)
 
