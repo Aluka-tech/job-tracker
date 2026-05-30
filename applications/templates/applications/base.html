@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{% block title %}Job Tracker{% endblock %}</title>
+   <title>{% block title %}Trackly{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'applications/css/style.css' %}">
 </head>
 
@@ -10,9 +10,9 @@
 
     <!-- NAVBAR -->
     <nav class="navbar">
-        <a href="{% url 'home' %}" class="logo">
-            JobTracker
-        </a>
+       <a href="{% url 'home' %}" class="logo">
+    <span class="logo-mark">✦</span> Trackly
+</a>
 
         <div class="nav-links">
             <a href="{% url 'dashboard' %}">Dashboard</a>

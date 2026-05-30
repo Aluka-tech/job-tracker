@@ -493,3 +493,9 @@ hr {
     opacity: 1;
     transform: translateY(0);
 }
+
+.logo-mark {
+    color: var(--gold);
+    font-size: 1rem;
+    margin-right: 0.25rem;
+}
